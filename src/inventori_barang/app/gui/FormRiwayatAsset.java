@@ -8,6 +8,7 @@ package inventori_barang.app.gui;
 
 import inventori_barang.app.controller.Koneksi;
 import inventori_barang.app.model.Barang;
+import inventori_barang.app.model.Login;
 import inventori_barang.app.model.RiwayatAsset;
 import inventori_barang.app.model.Table;
 import java.awt.event.KeyEvent;
@@ -44,7 +45,7 @@ public class FormRiwayatAsset extends javax.swing.JFrame {
     }
 
     private void Refresh(){
-        rs = ast.ShowData();
+        rs = ast.ShowData(Login.getId());
         tbl.SetTabel(jTable1, rs, namaKolom, jmlKolom, lebar);
         int count = jTable1.getRowCount();
         lblJumlahData.setText(String.valueOf(count));

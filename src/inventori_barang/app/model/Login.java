@@ -117,6 +117,7 @@ public class Login {
             while (res.next()) {
                 setNama(res.getString("nama"));
                 setId(res.getString("id"));
+                setStatus(res.getString("level"));
            } 
         } catch (SQLException e) {
 

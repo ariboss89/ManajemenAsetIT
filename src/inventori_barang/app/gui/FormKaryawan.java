@@ -225,7 +225,7 @@ public class FormKaryawan extends javax.swing.JFrame {
             }
         });
 
-        txtstatus1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Employee Staff", "IT Staff", "Manager", "Supervisor", " " }));
+        txtstatus1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Employee Staff", "IT Staff", "Manager", "Supervisor" }));
 
         jLabel9.setText("Level");
 
@@ -531,8 +531,6 @@ public class FormKaryawan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHapus;
-    private javax.swing.JButton btnHapus1;
-    private javax.swing.JButton btnHapus2;
     private javax.swing.JButton btnHapus3;
     private javax.swing.JButton btnTambah;
     private javax.swing.JButton btnUbah;

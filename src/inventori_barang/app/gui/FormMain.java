@@ -7,6 +7,7 @@ package inventori_barang.app.gui;
 
 import inventori_barang.app.controller.Koneksi;
 import inventori_barang.app.model.Login;
+import inventori_barang.app.model.Main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -22,37 +23,109 @@ import javax.swing.JOptionPane;
  */
 public class FormMain extends javax.swing.JFrame {
 
+    Main main = new Main();
+
     /**
      * Creates new form FormMain
      */
     public FormMain() {
         initComponents();
-        getContentPane().setBackground(new Color(23,35,51));
+        getContentPane().setBackground(new Color(23, 35, 51));
         Dimension windowSize = getSize();
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Point centerPoint = ge.getCenterPoint();
         int dx = centerPoint.x - windowSize.width / 2;
-        int dy = centerPoint.y - windowSize.height / 2;    
+        int dy = centerPoint.y - windowSize.height / 2;
         setLocation(dx, dy);
         jTextField1.setText(Login.getNama());
         jTextField2.setText(Login.getUsername());
-        CountReqAsset();
+        Auth();
+        Refresh();
         Run();
+    }
+
+    private void Refresh(){
+        CountReqAsset();
+        CountReqPurchasing();
+        ShowPengumuman();
+    }
+    
+    private void ShowPengumuman() {
+        java.sql.Connection conn = new Koneksi().connect();
+        try {
+            java.sql.Statement stmt = conn.createStatement();
+            java.sql.ResultSet res = stmt.executeQuery("select *from pengumuman");
+            while (res.next()) {
+                jTextArea1.setText(res.getString("pengumuman"));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }
+
+    private void Auth() {
+        String level = Login.getStatus();
+        if (level.equals("Manager")) {
+            menuBarang.setEnabled(false);
+            menuKategori.setEnabled(false);
+            menuKaryawan.setEnabled(false);
+            menuReqPurchasing.setEnabled(false);
+            menuApprovalAsset.setEnabled(false);
+            menuRiwayatPurchasing.setEnabled(false);
+            jTextArea1.setEditable(true);
+            jButton1.setVisible(true);
+        }
+        if (level.equals("Supervisor")) {
+            menuInput.setEnabled(false);
+            menuReqPurchasing.setEnabled(false);
+            menuApprovalAsset.setEnabled(false);
+            menuRiwayat.setEnabled(false);
+            jTextArea1.setEditable(true);
+            jButton1.setVisible(true);
+        }
+        if (level.equals("IT Staff")) {
+            menuSupplier.setEnabled(false);
+            menuReqAsset.setEnabled(false);
+            menuApprovalPurchasing.setEnabled(false);
+            menuRiwayatAsset.setEnabled(false);
+            jTextArea1.setEditable(true);
+            jButton1.setVisible(true);
+        }
+        if (level.equals("Employee Staff")) {
+            menuInput.setEnabled(false);
+            menuReqPurchasing.setEnabled(false);
+            menuMonitoring.setEnabled(false);
+            menuRiwayatPurchasing.setEnabled(false);
+            jButton1.setVisible(false);
+        }
     }
 
     private void CountReqAsset() {
         java.sql.Connection conn = new Koneksi().connect();
         try {
             java.sql.Statement stmt = conn.createStatement();
-            java.sql.ResultSet res = stmt.executeQuery("select count(idreqasset) as hitung from reqasset where status = 'NEW'");
+            java.sql.ResultSet res = stmt.executeQuery("select count(iddetailreqasset) as hitung from reqassetdetail where status = 'On Waiting'");
             while (res.next()) {
                 lblJumlahReqAsset.setText(res.getString("hitung"));
             }
-        }catch(SQLException ex){
-            
+        } catch (SQLException ex) {
+
         }
     }
-    
+
+    private void CountReqPurchasing() {
+        java.sql.Connection conn = new Koneksi().connect();
+        try {
+            java.sql.Statement stmt = conn.createStatement();
+            java.sql.ResultSet res = stmt.executeQuery("select count(iddetail) as hitung from reqpurchasingdetail where status = 'On Waiting'");
+            while (res.next()) {
+                lblJumlahReqPurchasing.setText(res.getString("hitung"));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }
+
     public void Run() {
         new Thread() {
             public void run() {
@@ -65,9 +138,9 @@ public class FormMain extends javax.swing.JFrame {
                     int menit = kalender.get(Calendar.MINUTE);
                     int detik = kalender.get(Calendar.SECOND);
                     int am_pm = kalender.get(Calendar.AM_PM);
-                    
+
                     int tahun = kalender.get(Calendar.YEAR);
-                    int bulan = kalender.get(Calendar.MONTH)+1;
+                    int bulan = kalender.get(Calendar.MONTH) + 1;
                     int hari = kalender.get(Calendar.DATE);
 
                     //mengatur menggunakan AM atau PM  
@@ -80,9 +153,9 @@ public class FormMain extends javax.swing.JFrame {
 
                     //mengatur format penulisan waktu  
                     String format_waktu = jam + ":" + menit + ":" + detik + " " + siang_malam;
-                    String formatTanggal = tahun+"/"+bulan+"/"+hari;
+                    String formatTanggal = tahun + "/" + bulan + "/" + hari;
                     //menampilkan pada label yang digunakan sebagai penunjuk waktu  
-                    lblJamdanTanggal.setText(format_waktu+" "+formatTanggal);
+                    lblJamdanTanggal.setText(format_waktu + " " + formatTanggal);
                 }
             }
         }.start();//ini wajib  
@@ -116,23 +189,29 @@ public class FormMain extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        menuInput = new javax.swing.JMenu();
+        menuKategori = new javax.swing.JMenuItem();
+        menuSupplier = new javax.swing.JMenuItem();
+        menuBarang = new javax.swing.JMenuItem();
+        menuKaryawan = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        menuReqAsset = new javax.swing.JMenuItem();
+        menuReqPurchasing = new javax.swing.JMenuItem();
+        menuMonitoring = new javax.swing.JMenu();
+        menuApprovalAsset = new javax.swing.JMenuItem();
+        menuApprovalPurchasing = new javax.swing.JMenuItem();
+        menuRiwayat = new javax.swing.JMenu();
+        menuRiwayatAsset = new javax.swing.JMenuItem();
+        menuRiwayatPurchasing = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -211,6 +290,7 @@ public class FormMain extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("PENGUMUMAN !!!");
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
@@ -224,6 +304,11 @@ public class FormMain extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inventori_barang/img/edit.png"))); // NOI18N
         jButton1.setText("UPDATE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -300,57 +385,101 @@ public class FormMain extends javax.swing.JFrame {
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jMenu1.setText("INPUT");
+        menuInput.setText("INPUT");
 
-        jMenuItem1.setText("DATA KATEGORI");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem3.setText("DATA SUPPLIER");
-        jMenu1.add(jMenuItem3);
-
-        jMenuItem2.setText("DATA BARANG");
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem8.setText("DATA BARANG MASUK");
-        jMenu1.add(jMenuItem8);
-
-        jMenuItem9.setText("DATA KARYAWAN");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        menuKategori.setText("DATA KATEGORI");
+        menuKategori.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                menuKategoriActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem9);
+        menuInput.add(menuKategori);
 
-        jMenuBar1.add(jMenu1);
+        menuSupplier.setText("DATA SUPPLIER");
+        menuSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSupplierActionPerformed(evt);
+            }
+        });
+        menuInput.add(menuSupplier);
+
+        menuBarang.setText("DATA BARANG");
+        menuBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBarangActionPerformed(evt);
+            }
+        });
+        menuInput.add(menuBarang);
+
+        menuKaryawan.setText("DATA KARYAWAN");
+        menuKaryawan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuKaryawanActionPerformed(evt);
+            }
+        });
+        menuInput.add(menuKaryawan);
+
+        jMenuBar1.add(menuInput);
 
         jMenu2.setText("REQUEST");
 
-        jMenuItem4.setText("REQUEST ASSET");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        menuReqAsset.setText("REQUEST ASSET");
+        menuReqAsset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                menuReqAssetActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu2.add(menuReqAsset);
 
-        jMenuItem5.setText("REQUEST PURCHASING");
-        jMenu2.add(jMenuItem5);
+        menuReqPurchasing.setText("REQUEST PURCHASING");
+        menuReqPurchasing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuReqPurchasingActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuReqPurchasing);
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("MONITORING");
+        menuMonitoring.setText("MONITORING");
 
-        jMenuItem6.setText("APPROVAL ASSET");
-        jMenu3.add(jMenuItem6);
+        menuApprovalAsset.setText("APPROVAL ASSET");
+        menuApprovalAsset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuApprovalAssetActionPerformed(evt);
+            }
+        });
+        menuMonitoring.add(menuApprovalAsset);
 
-        jMenuItem7.setText("APPROVAL PURCHASING");
-        jMenu3.add(jMenuItem7);
+        menuApprovalPurchasing.setText("APPROVAL PURCHASING");
+        menuApprovalPurchasing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuApprovalPurchasingActionPerformed(evt);
+            }
+        });
+        menuMonitoring.add(menuApprovalPurchasing);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(menuMonitoring);
 
-        jMenu4.setText("LAPORAN");
-        jMenuBar1.add(jMenu4);
+        menuRiwayat.setText("RIWAYAT");
+
+        menuRiwayatAsset.setText("RIWAYAT ASSET");
+        menuRiwayatAsset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRiwayatAssetActionPerformed(evt);
+            }
+        });
+        menuRiwayat.add(menuRiwayatAsset);
+
+        menuRiwayatPurchasing.setText("RIWAYAT PURCHASING");
+        menuRiwayatPurchasing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRiwayatPurchasingActionPerformed(evt);
+            }
+        });
+        menuRiwayat.add(menuRiwayatPurchasing);
+
+        jMenuBar1.add(menuRiwayat);
 
         jMenu5.setText("LOG OUT");
         jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -412,24 +541,74 @@ public class FormMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nama = Login.getNama();
         int ok = JOptionPane.showConfirmDialog(null, "Anda Yakin ?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
-        if(ok == 0){
-            JOptionPane.showMessageDialog(null, "Goodbye "+nama);
+        if (ok == 0) {
+            JOptionPane.showMessageDialog(null, "Goodbye " + nama);
             System.exit(ok);
-        }
-        else{
-            
+        } else {
+
         }
     }//GEN-LAST:event_jMenu5MouseClicked
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void menuReqAssetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReqAssetActionPerformed
         // TODO add your handling code here:
         new FormRequestAsset(this, rootPaneCheckingEnabled).show();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_menuReqAssetActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void menuKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuKaryawanActionPerformed
         // TODO add your handling code here:
         new FormKaryawan().show();
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_menuKaryawanActionPerformed
+
+    private void menuSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSupplierActionPerformed
+        // TODO add your handling code here:
+        new FormSupplier().show();
+    }//GEN-LAST:event_menuSupplierActionPerformed
+
+    private void menuKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuKategoriActionPerformed
+        // TODO add your handling code here:
+        new FormKategori().show();
+    }//GEN-LAST:event_menuKategoriActionPerformed
+
+    private void menuBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBarangActionPerformed
+        // TODO add your handling code here:
+        new FormBarang().show();
+    }//GEN-LAST:event_menuBarangActionPerformed
+
+    private void menuReqPurchasingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReqPurchasingActionPerformed
+        // TODO add your handling code here:
+        new FormRequestPurchasing(this, rootPaneCheckingEnabled).show();
+    }//GEN-LAST:event_menuReqPurchasingActionPerformed
+
+    private void menuApprovalAssetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuApprovalAssetActionPerformed
+        // TODO add your handling code here:
+        new FormApprovalRequestAsset().show();
+    }//GEN-LAST:event_menuApprovalAssetActionPerformed
+
+    private void menuApprovalPurchasingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuApprovalPurchasingActionPerformed
+        // TODO add your handling code here:
+        new FormApprovalRequestPurchasing().show();
+    }//GEN-LAST:event_menuApprovalPurchasingActionPerformed
+
+    private void menuRiwayatAssetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRiwayatAssetActionPerformed
+        // TODO add your handling code here:
+        new FormRiwayatAsset().show();
+    }//GEN-LAST:event_menuRiwayatAssetActionPerformed
+
+    private void menuRiwayatPurchasingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRiwayatPurchasingActionPerformed
+        // TODO add your handling code here:
+        new FormRiwayatPurchasing().show();
+    }//GEN-LAST:event_menuRiwayatPurchasingActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String isi = jTextArea1.getText();
+        main.Update(isi);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        Refresh();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -474,21 +653,9 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -500,5 +667,18 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JLabel lblJamdanTanggal;
     private javax.swing.JLabel lblJumlahReqAsset;
     private javax.swing.JLabel lblJumlahReqPurchasing;
+    private javax.swing.JMenuItem menuApprovalAsset;
+    private javax.swing.JMenuItem menuApprovalPurchasing;
+    private javax.swing.JMenuItem menuBarang;
+    private javax.swing.JMenu menuInput;
+    private javax.swing.JMenuItem menuKaryawan;
+    private javax.swing.JMenuItem menuKategori;
+    private javax.swing.JMenu menuMonitoring;
+    private javax.swing.JMenuItem menuReqAsset;
+    private javax.swing.JMenuItem menuReqPurchasing;
+    private javax.swing.JMenu menuRiwayat;
+    private javax.swing.JMenuItem menuRiwayatAsset;
+    private javax.swing.JMenuItem menuRiwayatPurchasing;
+    private javax.swing.JMenuItem menuSupplier;
     // End of variables declaration//GEN-END:variables
 }

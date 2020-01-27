@@ -436,10 +436,9 @@ public class FormRequestPurchasing extends javax.swing.JDialog {
         java.sql.Connection conn = new Koneksi().connect();
         try {
             java.sql.Statement stmt = conn.createStatement();
-            java.sql.ResultSet res = stmt.executeQuery("select *from tmsupplier where nama = ");
+            java.sql.ResultSet res = stmt.executeQuery("select *from tmsupplier ");
             while (res.next()) {
-                cbNamaSUpplier.addItem(res.getString("nama"));
-                prc.setIdSupplier(res.getString("id"));
+                prc.setIdSupplier(res.getString("kode"));
             }
         } catch (SQLException ex) {
 

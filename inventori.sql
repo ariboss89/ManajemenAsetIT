@@ -1,8 +1,23 @@
 ﻿# Host: localhost  (Version: 5.5.8)
-# Date: 2020-01-27 16:21:56
+# Date: 2020-01-27 23:05:33
 # Generator: MySQL-Front 5.3  (Build 4.81)
 
 /*!40101 SET NAMES utf8 */;
+
+#
+# Structure for table "pengumuman"
+#
+
+DROP TABLE IF EXISTS `pengumuman`;
+CREATE TABLE `pengumuman` (
+  `pengumuman` varchar(10000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#
+# Data for table "pengumuman"
+#
+
+INSERT INTO `pengumuman` VALUES ('Apa lagi hah ?');
 
 #
 # Structure for table "reqasset"
@@ -105,7 +120,7 @@ CREATE TABLE `tmbarang` (
 # Data for table "tmbarang"
 #
 
-INSERT INTO `tmbarang` VALUES (5,'A-005','Xiaomi TV',NULL,'Buah',67),(7,'S-022','LG',NULL,'Buah',10),(9,'S-021','Samsung 21 Inch',NULL,'Buah',80),(10,'A-011','Toshiba 20 Inch',NULL,'Buah',12),(11,'90AB','LCD TV Samsung',NULL,'Buah',90),(12,'F-010','Samsung 24 Inch',NULL,'Buah',80),(13,'A-001','Simbada',NULL,'Buah',70),(14,'M-001','MacBook Pro 15 Inch',NULL,'Buah',14),(15,'M-002','MacBook Pro 17 Inch',NULL,'Buah',19),(16,'C-001','Acer Aspire One 15 Inch',NULL,'Buah',15),(17,'C-002','Acer Aspire One 18 Inch',NULL,'Buah',6),(18,'A-002','Simbada Type C3',NULL,'Buah',68);
+INSERT INTO `tmbarang` VALUES (5,'A-005','Xiaomi TV','TV','Buah',77),(7,'S-022','LG',NULL,'Buah',10),(9,'S-021','Samsung 21 Inch',NULL,'Buah',80),(10,'A-011','Toshiba 20 Inch',NULL,'Buah',12),(11,'90AB','LCD TV Samsung',NULL,'Buah',90),(12,'F-010','Samsung 24 Inch',NULL,'Buah',80),(13,'A-001','Simbada',NULL,'Buah',70),(14,'M-001','MacBook Pro 15 Inch',NULL,'Buah',14),(15,'M-002','MacBook Pro 17 Inch',NULL,'Buah',19),(16,'C-001','Acer Aspire One 15 Inch',NULL,'Buah',15),(17,'C-002','Acer Aspire One 18 Inch',NULL,'Buah',6),(18,'A-002','Simbada Type C3',NULL,'Buah',68);
 
 #
 # Structure for table "tmkategori"
@@ -144,7 +159,7 @@ CREATE TABLE `tmpetugas` (
 # Data for table "tmpetugas"
 #
 
-INSERT INTO `tmpetugas` VALUES (2,'Muhamad Yusuf','admin','admin','IT Staff','aktif'),(3,'Zae','operator','8fd0959e8c40dc236d0cb1e29a05a1a91f751e5c',NULL,'aktif'),(6,'Ari','ariboss89','123456',NULL,'aktif');
+INSERT INTO `tmpetugas` VALUES (2,'Muhamad Yusuf','admin','admin','IT Staff','aktif'),(3,'Zae','operator','admin','Manager','aktif'),(6,'Ari','ariboss89','123456','Supervisor','aktif'),(7,'Manise','manise123','123456','Employee Staff','aktif');
 
 #
 # Structure for table "tmsupplier"

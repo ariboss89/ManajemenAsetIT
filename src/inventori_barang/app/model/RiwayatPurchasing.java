@@ -42,7 +42,7 @@ public class RiwayatPurchasing {
         this.id = id;
     }
 
-    public String[][] ShowData() {
+    public String[][] ShowData(String id) {
 
         res = null;
         String[][] data = null;
@@ -56,7 +56,7 @@ public class RiwayatPurchasing {
             if (res.next()) {
                 jumlahBaris = res.getInt("Jumlah");
             }
-            query = "select *from reqpurchasing";
+            query = "select *from reqpurchasing where idpetugas = '"+id+"'";
             res = st.executeQuery(query);
             data = new String[jumlahBaris][4];
             int r = 0;

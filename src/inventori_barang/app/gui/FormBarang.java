@@ -60,7 +60,7 @@ public class FormBarang extends javax.swing.JFrame {
         java.sql.Connection conn = new Koneksi().connect();
         try{
             java.sql.Statement stmt = conn.createStatement();
-            java.sql.ResultSet res = stmt.executeQuery("select *from tmbarang");
+            java.sql.ResultSet res = stmt.executeQuery("select *from tmkategori");
             while(res.next()){
                 cmbid_kategori.addItem(res.getString("nama"));
             }
@@ -368,7 +368,10 @@ public class FormBarang extends javax.swing.JFrame {
         String nama = txtnama.getText().trim();
         String kategori = cmbid_kategori.getSelectedItem().toString().trim();
         String satuan = txtsatuan.getText().trim();
-        int stok = Integer.parseInt(txtstok.getText().trim());
+        int addstok = Integer.parseInt(txtstok.getText().trim());
+        String stokexist = brg.getStok();
+        int a = Integer.valueOf(stokexist);
+        int total = a+addstok;
         
         if(kode.equals("")){
             JOptionPane.showMessageDialog(null, "Tidak Boleh Kosong");
@@ -386,12 +389,8 @@ public class FormBarang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Tidak Boleh Kosong");
             txtsatuan.requestFocus();
         }
-        else if(stok == 0){
-            JOptionPane.showMessageDialog(null, "Tidak Boleh Kosong");
-            txtstok.requestFocus();
-        }
         else{
-            brg.Update(nama, kategori, satuan, stok, kode);
+            brg.Update(nama, kategori, satuan, total, kode);
             Refresh();
         }
     }//GEN-LAST:event_btnUbahActionPerformed
@@ -412,8 +411,10 @@ public class FormBarang extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
-        txtnama.setText(jTable1.getValueAt(row, 0).toString());
-        txtkode.setText(jTable1.getValueAt(row, 1).toString());
+        txtkode.setText(jTable1.getValueAt(row, 0).toString());
+        txtnama.setText(jTable1.getValueAt(row, 1).toString());
+        txtsatuan.setText(jTable1.getValueAt(row, 3).toString());
+        brg.setStok(jTable1.getValueAt(row, 4).toString());
         btnsave.setEnabled(false);
         btnUbah.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked

@@ -63,7 +63,7 @@ public class FormRequestAsset extends javax.swing.JDialog {
         txttgl.setText(dateFormat.format(cal.getTime()));
         txtnm_petugas.setText(Login.getNama());
 
-        SelectPelanggan();
+        SelectSupplier();
         Refresh();
     }
 
@@ -78,11 +78,11 @@ public class FormRequestAsset extends javax.swing.JDialog {
         setLocation(dx, dy);
     }
 
-    private void SelectPelanggan() {
+    private void SelectSupplier() {
         java.sql.Connection conn = new Koneksi().connect();
         try {
             java.sql.Statement stmt = conn.createStatement();
-            java.sql.ResultSet res = stmt.executeQuery("select *from tmsupplier");
+            java.sql.ResultSet res = stmt.executeQuery("select distinct(nama) from tmsupplier");
             while (res.next()) {
                 cbNamaSUpplier.addItem(res.getString("nama"));
             }
@@ -97,7 +97,7 @@ public class FormRequestAsset extends javax.swing.JDialog {
         rs = req.ShowData(req.getIdAsset());
         tbl.SetTabel(jTable1, rs, namaKolom, jmlKolom, lebar);
         txtNamaBarang.setText("-");
-        cbNamaSUpplier.setSelectedItem("Pilih");
+        //cbNamaSUpplier.setSelectedItem("Pilih");
         cbNamaSUpplier.requestFocus();
         SumJumlah();
     }
@@ -435,10 +435,9 @@ public class FormRequestAsset extends javax.swing.JDialog {
         java.sql.Connection conn = new Koneksi().connect();
         try {
             java.sql.Statement stmt = conn.createStatement();
-            java.sql.ResultSet res = stmt.executeQuery("select *from tmsupplier where nama = ");
+            java.sql.ResultSet res = stmt.executeQuery("select *from tmsupplier ");
             while (res.next()) {
-                cbNamaSUpplier.addItem(res.getString("nama"));
-                req.setIdSupplier(res.getString("id"));
+                req.setIdSupplier(res.getString("kode"));
             }
         } catch (SQLException ex) {
 
