@@ -146,7 +146,6 @@ public class FormApprovalRequestPurchasing extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Inventori Barang :: Approval Asset Request");
         setUndecorated(true);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1364, 730));
