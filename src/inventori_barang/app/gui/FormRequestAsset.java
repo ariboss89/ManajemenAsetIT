@@ -64,6 +64,7 @@ public class FormRequestAsset extends javax.swing.JDialog {
         txtnm_petugas.setText(Login.getNama());
 
         SelectSupplier();
+        ShowNama();
         Refresh();
     }
 
@@ -90,16 +91,28 @@ public class FormRequestAsset extends javax.swing.JDialog {
 
         }
     }
+    
+    private void ShowNama(){
+        java.sql.Connection conn = new Koneksi().connect();
+        try {
+            java.sql.Statement stmt = conn.createStatement();
+            java.sql.ResultSet res = stmt.executeQuery("select *from tmbarang");
+            while (res.next()) {
+                cbNamaBarang.addItem(res.getString("nama"));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }
 
     private void Refresh() {
         IdDetail();
         IdAsset();
         rs = req.ShowData(req.getIdAsset());
         tbl.SetTabel(jTable1, rs, namaKolom, jmlKolom, lebar);
-        txtNamaBarang.setText("-");
-        //cbNamaSUpplier.setSelectedItem("Pilih");
         cbNamaSUpplier.requestFocus();
         SumJumlah();
+        txtJumlah.setText("");
     }
 
     private void TableEmpty() {
@@ -188,14 +201,14 @@ public class FormRequestAsset extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        lblKode = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtJumlah = new javax.swing.JTextField();
         btnok = new javax.swing.JButton();
-        txtNamaBarang = new javax.swing.JLabel();
-        txtKode = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        cbNamaBarang = new javax.swing.JComboBox();
+        txtNamaBarang = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txttgl = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -235,7 +248,7 @@ public class FormRequestAsset extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel3.setForeground(new java.awt.Color(245, 245, 245));
 
-        jLabel4.setText("Kode Barang");
+        lblKode.setText("Kode Barang");
 
         jLabel6.setText("Jumlah");
 
@@ -249,19 +262,6 @@ public class FormRequestAsset extends javax.swing.JDialog {
         btnok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnokActionPerformed(evt);
-            }
-        });
-
-        txtNamaBarang.setText("Nama Barang");
-
-        txtKode.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtKodeFocusLost(evt);
-            }
-        });
-        txtKode.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtKodeKeyReleased(evt);
             }
         });
 
@@ -288,27 +288,35 @@ public class FormRequestAsset extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(jTable1);
 
+        cbNamaBarang.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbNamaBarangItemStateChanged(evt);
+            }
+        });
+
+        txtNamaBarang.setText("Nama Barang");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel4)
-                .addGap(41, 41, 41)
-                .addComponent(txtKode, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnok, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblKode, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnok, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -316,12 +324,12 @@ public class FormRequestAsset extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(lblKode)
                     .addComponent(jLabel6)
                     .addComponent(txtJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnok)
-                    .addComponent(txtNamaBarang)
-                    .addComponent(txtKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNamaBarang))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addContainerGap())
@@ -358,9 +366,12 @@ public class FormRequestAsset extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnsave, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -374,13 +385,9 @@ public class FormRequestAsset extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txttgl, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnsave, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -413,14 +420,14 @@ public class FormRequestAsset extends javax.swing.JDialog {
         // TODO add your handling code here:       
         String idDetail = req.getIdDetail();
         String idReqAsset = req.getIdAsset();
-        String kodeBarang = txtKode.getText();
+        String kodeBarang = lblKode.getText();
         int jml = Integer.parseInt(txtJumlah.getText());
         req.setStatus("On Waiting");
         String status = req.getStatus();
 
         if (kodeBarang.equals("")) {
             JOptionPane.showMessageDialog(null, "Tidak Boleh Kosong");
-            txtKode.requestFocus();
+            lblKode.requestFocus();
         } else if (jml == 0) {
             JOptionPane.showMessageDialog(null, "Tidak Boleh Kosong");
             txtJumlah.requestFocus();
@@ -444,10 +451,6 @@ public class FormRequestAsset extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cbNamaSUpplierItemStateChanged
 
-    private void txtKodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKodeFocusLost
-        // TODO add your handling code here:     
-    }//GEN-LAST:event_txtKodeFocusLost
-
     private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
         // TODO add your handling code here:
         String idreqasset = req.getIdAsset();
@@ -470,24 +473,6 @@ public class FormRequestAsset extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtJumlahKeyTyped
 
-    private void txtKodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKodeKeyReleased
-        // TODO add your handling code here:
-        try {
-            String kodebarang = txtKode.getText().trim();
-            java.sql.Connection conn = new Database().openkoneksi();
-            java.sql.Statement stmt = conn.createStatement();
-            java.sql.ResultSet res = stmt.executeQuery("select *from tmbarang where kode = '" + kodebarang + "' ");
-            while (res.next()) {
-                txtNamaBarang.setText(res.getString("nama"));
-                req.setIdBarang(res.getString("id"));
-            }
-        } catch (SQLException ex) {
-
-        } catch (Exception ex) {
-
-        }
-    }//GEN-LAST:event_txtKodeKeyReleased
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
@@ -505,6 +490,23 @@ public class FormRequestAsset extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_jTable1KeyPressed
+
+    private void cbNamaBarangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbNamaBarangItemStateChanged
+        // TODO add your handling code here:
+         try {
+            java.sql.Connection conn = new Database().openkoneksi();
+            java.sql.Statement stmt = conn.createStatement();
+            java.sql.ResultSet res = stmt.executeQuery("select *from tmbarang where nama = '" + cbNamaBarang.getSelectedItem() + "' ");
+            while (res.next()) {
+                lblKode.setText(res.getString("kode"));
+                req.setIdBarang(res.getString("id"));
+            }
+        } catch (SQLException ex) {
+
+        } catch (Exception ex) {
+
+        }
+    }//GEN-LAST:event_cbNamaBarangItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -552,11 +554,11 @@ public class FormRequestAsset extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnok;
     private javax.swing.JButton btnsave;
+    private javax.swing.JComboBox cbNamaBarang;
     private javax.swing.JComboBox<String> cbNamaSUpplier;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
@@ -564,8 +566,8 @@ public class FormRequestAsset extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblKode;
     private javax.swing.JTextField txtJumlah;
-    private javax.swing.JTextField txtKode;
     private javax.swing.JLabel txtNamaBarang;
     private javax.swing.JTextField txtnm_petugas;
     private javax.swing.JTextField txttgl;

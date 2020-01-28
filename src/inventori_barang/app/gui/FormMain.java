@@ -78,8 +78,8 @@ public class FormMain extends javax.swing.JFrame {
         if (level.equals("Supervisor")) {
             menuInput.setEnabled(false);
             menuReqPurchasing.setEnabled(false);
-            menuApprovalAsset.setEnabled(false);
-            menuRiwayat.setEnabled(false);
+            menuMonitoring.setEnabled(false);
+            menuRiwayatPurchasing.setEnabled(false);
             jTextArea1.setEditable(true);
             jButton1.setVisible(true);
         }
