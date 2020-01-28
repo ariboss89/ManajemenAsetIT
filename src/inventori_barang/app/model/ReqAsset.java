@@ -29,7 +29,16 @@ public class ReqAsset {
     private String IdAsset;
     private String status;
     private String sum;
+    private int stok;
 
+    public int getStok() {
+        return stok;
+    }
+
+    public void setStok(int stok) {
+        this.stok = stok;
+    }
+    
     public String getIdSupplier() {
         return IdSupplier;
     }

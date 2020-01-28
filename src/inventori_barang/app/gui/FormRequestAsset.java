@@ -91,8 +91,8 @@ public class FormRequestAsset extends javax.swing.JDialog {
 
         }
     }
-    
-    private void ShowNama(){
+
+    private void ShowNama() {
         java.sql.Connection conn = new Koneksi().connect();
         try {
             java.sql.Statement stmt = conn.createStatement();
@@ -493,7 +493,7 @@ public class FormRequestAsset extends javax.swing.JDialog {
 
     private void cbNamaBarangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbNamaBarangItemStateChanged
         // TODO add your handling code here:
-         try {
+        try {
             java.sql.Connection conn = new Database().openkoneksi();
             java.sql.Statement stmt = conn.createStatement();
             java.sql.ResultSet res = stmt.executeQuery("select *from tmbarang where nama = '" + cbNamaBarang.getSelectedItem() + "' ");

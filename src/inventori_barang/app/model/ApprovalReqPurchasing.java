@@ -70,7 +70,7 @@ public class ApprovalReqPurchasing extends ReqAsset {
         con.connect();
         try {
             st = con.conn.createStatement();
-            query = "update reqpurchasingdetail set status='" + status + "', catatan = '"+catatan+"' where iddetailreqasset = '" + Id + "'";
+            query = "update reqpurchasingdetail set status='" + status + "', catatan = '"+catatan+"' where iddetail = '" + Id + "'";
             st.executeUpdate(query);
             st.close();
             con.conn.close();

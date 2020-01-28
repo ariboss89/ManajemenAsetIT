@@ -508,18 +508,23 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
         // TODO add your handling code here:
         String iddetail = txtIdDetail.getText().trim();
         String catatan = jTextArea1.getText().trim();
-        if (jRadioButton1.isSelected()) {
+        int currentstok = apv.getStok();
+        int reqstok = Integer.parseInt(txtJumlah.getText());
+        
+        if (jRadioButton1.isSelected() && reqstok < currentstok) {
+            HitungStok();
             String status = "Approved";
             apv.Update(status, catatan, iddetail);
-            HitungStok();
             Refresh();
-        } else if (jRadioButton2.isSelected()) {
+        } else if (jRadioButton2.isSelected() && reqstok < currentstok) {
             String status = "Unapproved";
-            apv.Update(status, catatan, iddetail);
             HitungStok();
+            apv.Update(status, catatan, iddetail);
             Refresh();
         } else {
-            JOptionPane.showMessageDialog(null, "Pilihan Belum Ada !!!");
+            JOptionPane.showMessageDialog(null, "Belum Bisa Di Proses Karena Stok Kurang Atau Menu Belum di Pilih");
+            jRadioButton1.setSelected(false);
+            jRadioButton2.setSelected(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
