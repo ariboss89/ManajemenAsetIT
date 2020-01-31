@@ -96,7 +96,7 @@ public class FormRequestAsset extends javax.swing.JDialog {
         java.sql.Connection conn = new Koneksi().connect();
         try {
             java.sql.Statement stmt = conn.createStatement();
-            java.sql.ResultSet res = stmt.executeQuery("select *from tmbarang");
+            java.sql.ResultSet res = stmt.executeQuery("select *from tmbarang where stok != '0'");
             while (res.next()) {
                 cbNamaBarang.addItem(res.getString("nama"));
             }
