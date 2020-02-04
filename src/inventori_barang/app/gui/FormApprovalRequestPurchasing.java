@@ -130,6 +130,7 @@ public class FormApprovalRequestPurchasing extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jRadioButtonReceived = new javax.swing.JRadioButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -318,16 +319,26 @@ public class FormApprovalRequestPurchasing extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setText("MENU");
 
+        jRadioButtonReceived.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jRadioButtonReceived.setText("Received");
+        jRadioButtonReceived.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButtonReceivedMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
+                .addGap(52, 52, 52)
                 .addComponent(jRadioButton1)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButtonReceived)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -336,16 +347,17 @@ public class FormApprovalRequestPurchasing extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addGap(0, 12, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButtonReceived))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -503,7 +515,11 @@ public class FormApprovalRequestPurchasing extends javax.swing.JFrame {
             String status = "Unapproved";
             apv.Update(status, catatan, iddetail);
             Refresh();
-        } else {
+        } else if (jRadioButtonReceived.isSelected()) {
+            String status = "Received";
+            apv.Update(status, catatan, iddetail);
+            Refresh();
+        }else {
             JOptionPane.showMessageDialog(null, "Pilihan Belum Ada !!!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -523,15 +539,15 @@ public class FormApprovalRequestPurchasing extends javax.swing.JFrame {
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
-//        int row = jTable2.getSelectedRow();
-//        txtIdDetail.setText(jTable2.getValueAt(row, 0).toString());
-//        txtId.setText(jTable2.getValueAt(row, 1).toString());
-//        req.setIdBarang(jTable2.getValueAt(row, 2).toString());
-//        ShowNamaBarang();
-//        txtJumlah.setText(jTable2.getValueAt(row, 3).toString());
-//        txtStatus.setText(jTable2.getValueAt(row, 4).toString());
-//        ShowCatatan();
-//        jButton1.setEnabled(true);
+        int row = jTable2.getSelectedRow();
+        txtIdDetail.setText(jTable2.getValueAt(row, 0).toString());
+        txtId.setText(jTable2.getValueAt(row, 1).toString());
+        req.setIdBarang(jTable2.getValueAt(row, 2).toString());
+        ShowNamaBarang();
+        txtJumlah.setText(jTable2.getValueAt(row, 3).toString());
+        txtStatus.setText(jTable2.getValueAt(row, 4).toString());
+        ShowCatatan();
+        jButton1.setEnabled(true);
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
@@ -556,6 +572,10 @@ public class FormApprovalRequestPurchasing extends javax.swing.JFrame {
         // TODO add your handling code here:
         jRadioButton1.setSelected(false);
     }//GEN-LAST:event_jRadioButton2MouseClicked
+
+    private void jRadioButtonReceivedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonReceivedMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonReceivedMouseClicked
 
     /**
      * @param args the command line arguments
@@ -613,6 +633,7 @@ public class FormApprovalRequestPurchasing extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButtonReceived;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
