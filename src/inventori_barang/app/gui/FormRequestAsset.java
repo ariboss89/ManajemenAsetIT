@@ -187,6 +187,19 @@ public class FormRequestAsset extends javax.swing.JDialog {
         }
         req.setSum(String.valueOf(a));
     }
+    
+    private void ShowDepartemen(){
+        java.sql.Connection conn = new Koneksi().connect();
+        try {
+            java.sql.Statement stmt = conn.createStatement();
+            java.sql.ResultSet res = stmt.executeQuery("select *from tmpetugas where id = '"+ Login.getId()+"'");
+            while (res.next()) {
+                req.setDepartemen(res.getString("level"));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -458,8 +471,10 @@ public class FormRequestAsset extends javax.swing.JDialog {
         SumJumlah();
         String idsupplier = req.getIdSupplier();
         String idpetugas = Login.getId();
+        ShowDepartemen();
+        String departemen = req.getDepartemen();
 
-        req.Save(idreqasset, tanggal, a, idsupplier, idpetugas);
+        req.Save(idreqasset, tanggal, a, idsupplier, idpetugas, departemen);
         IdAsset();
         Refresh();
     }//GEN-LAST:event_btnsaveActionPerformed

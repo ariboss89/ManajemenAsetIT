@@ -32,12 +32,12 @@ public class Karyawan {
         this.id = id;
     }
     
-    public void Save(String nama, String username, String password, String level, String status) {
+    public void Save(String nama, String username, String password, String level, String departemen, String status) {
         con = new Koneksi();
         con.connect();
         try {
             st = con.conn.createStatement();
-            query = "insert into tmpetugas (nama, username, password, level, status)values('" + nama + "','" + username + "','" + password + "','" + level + "','"+status+"')";
+            query = "insert into tmpetugas (nama, username, password, level, departemen, status)values('" + nama + "','" + username + "','" + password + "','" + level + "','"+departemen+"','"+status+"')";
             st.executeUpdate(query);
             st.close();
             con.conn.close();
@@ -46,12 +46,12 @@ public class Karyawan {
         }
     }
     
-    public void Update(String nama, String username, String level, String status, int id) {
+    public void Update(String nama, String username, String level, String departemen, String status, int id) {
         con = new Koneksi();
         con.connect();
         try {
             st = con.conn.createStatement();
-            query = "update tmpetugas set nama='" + nama + "', username = '"+username+"', level = '"+level+"', status = '"+status+"' where id = '" + id + "'";
+            query = "update tmpetugas set nama='" + nama + "', username = '"+username+"', level = '"+level+"', departemen = '"+departemen+"', status = '"+status+"' where id = '" + id + "'";
             st.executeUpdate(query);
             st.close();
             con.conn.close();
@@ -92,20 +92,21 @@ public class Karyawan {
             }
             query = "select *from tmpetugas";
             res = st.executeQuery(query);
-            data = new String[jumlahBaris][4];
+            data = new String[jumlahBaris][5];
             int r = 0;
             while (res.next()) {
                 data[r][0] = res.getString("nama");
                 data[r][1] = res.getString("username");
                 data[r][2] = res.getString("level");
-                data[r][3] = res.getString("status");
+                data[r][3] = res.getString("departemen");
+                data[r][4] = res.getString("status");
                 r++;
             }
             int jmlBaris = r;
             String[][] tmpArray = data;
-            data = new String[jmlBaris][4];
+            data = new String[jmlBaris][5];
             for (r = 0; r < jmlBaris; r++) {
-                for (int c = 0; c < 4; c++) {
+                for (int c = 0; c < 5; c++) {
                     data[r][c] = tmpArray[r][c];
                 }
             }

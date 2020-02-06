@@ -22,6 +22,15 @@ public class ApprovalReqAsset extends ReqAsset {
     private String query;
     private int stok;
     private int total;
+    private int Id;
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
     
     public String[][] ShowByStatus(String Status) {
 

@@ -51,6 +51,8 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
         txtJumlah.setText("");
         txtStatus.setText("");
         jTextArea1.setText("");
+        txtNamaPerequest.setText("");
+        txtDepartemen.setText("");
         jButton1.setEnabled(false);
         jRadioButton1.setSelected(false);
         jRadioButton2.setSelected(false);
@@ -95,6 +97,33 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
             java.sql.ResultSet res = stmt.executeQuery("select *from reqassetdetail where iddetailreqasset = '" + txtIdDetail.getText() + "'");
             while (res.next()) {
                 jTextArea1.setText(res.getString("catatan"));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }
+    
+    private void ShowRequest() {
+        java.sql.Connection conn = new Koneksi().connect();
+        try {
+            java.sql.Statement stmt = conn.createStatement();
+            java.sql.ResultSet res = stmt.executeQuery("select *from reqasset where idreqasset = '" + txtId.getText() + "'");
+            while (res.next()) {
+                apv.setId(res.getInt("idpetugas"));
+            }
+        } catch (SQLException ex) {
+
+        }
+    }
+    
+    private void ShowNamaRequest() {
+        java.sql.Connection conn = new Koneksi().connect();
+        try {
+            java.sql.Statement stmt = conn.createStatement();
+            java.sql.ResultSet res = stmt.executeQuery("select *from tmpetugas where id = '" + apv.getId() + "'");
+            while (res.next()) {
+                txtNamaPerequest.setText(res.getString("nama"));
+                txtDepartemen.setText(res.getString("departemen"));
             }
         } catch (SQLException ex) {
 
@@ -157,9 +186,18 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel12 = new javax.swing.JLabel();
+        txtNamaPerequest = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txtDepartemen = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1364, 730));
 
@@ -396,6 +434,16 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane4.setViewportView(jTextArea1);
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setText("Nama ");
+
+        txtNamaPerequest.setEditable(false);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setText("Departemen");
+
+        txtDepartemen.setEditable(false);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -403,15 +451,18 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNamaPerequest, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtIdDetail)
                             .addComponent(txtId)
                             .addComponent(txtNamaBarang)
@@ -420,7 +471,10 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtDepartemen, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -446,6 +500,14 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNamaPerequest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDepartemen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -533,6 +595,8 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow();
         txtIdDetail.setText(jTable1.getValueAt(row, 0).toString());
         txtId.setText(jTable1.getValueAt(row, 1).toString());
+        ShowRequest();
+        ShowNamaRequest();
         req.setIdBarang(jTable1.getValueAt(row, 2).toString());
         ShowNamaBarang();
         txtJumlah.setText(jTable1.getValueAt(row, 3).toString());
@@ -559,6 +623,8 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
         int row = jTable3.getSelectedRow();
         txtIdDetail.setText(jTable3.getValueAt(row, 0).toString());
         txtId.setText(jTable3.getValueAt(row, 1).toString());
+        ShowRequest();
+        ShowNamaRequest();
         req.setIdBarang(jTable3.getValueAt(row, 2).toString());
         ShowNamaBarang();
         txtJumlah.setText(jTable3.getValueAt(row, 3).toString());
@@ -576,6 +642,11 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
         // TODO add your handling code here:
         jRadioButton1.setSelected(false);
     }//GEN-LAST:event_jRadioButton2MouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        Refresh();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -618,6 +689,8 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -641,10 +714,12 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField txtDepartemen;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIdDetail;
     private javax.swing.JTextField txtJumlah;
     private javax.swing.JTextField txtNamaBarang;
+    private javax.swing.JTextField txtNamaPerequest;
     private javax.swing.JTextField txtStatus;
     // End of variables declaration//GEN-END:variables
 }

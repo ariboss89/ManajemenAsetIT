@@ -12,10 +12,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -72,6 +79,8 @@ public class FormMain extends javax.swing.JFrame {
             menuReqPurchasing.setEnabled(false);
             menuApprovalAsset.setEnabled(false);
             menuRiwayatPurchasing.setEnabled(false);
+            menuLaporan.setEnabled(false);
+            menuPenerimaan.setEnabled(false);
             jTextArea1.setEditable(true);
             jButton1.setVisible(true);
         }
@@ -80,6 +89,8 @@ public class FormMain extends javax.swing.JFrame {
             menuReqPurchasing.setEnabled(false);
             menuMonitoring.setEnabled(false);
             menuRiwayatPurchasing.setEnabled(false);
+            menuLaporan.setEnabled(false);
+            menuPenerimaan.setEnabled(false);
             jTextArea1.setEditable(true);
             jButton1.setVisible(true);
         }
@@ -96,6 +107,8 @@ public class FormMain extends javax.swing.JFrame {
             menuReqPurchasing.setEnabled(false);
             menuMonitoring.setEnabled(false);
             menuRiwayatPurchasing.setEnabled(false);
+            menuLaporan.setEnabled(false);
+            menuPenerimaan.setEnabled(false);
             jButton1.setVisible(false);
         }
     }
@@ -203,6 +216,10 @@ public class FormMain extends javax.swing.JFrame {
         menuRiwayat = new javax.swing.JMenu();
         menuRiwayatAsset = new javax.swing.JMenuItem();
         menuRiwayatPurchasing = new javax.swing.JMenuItem();
+        menuLaporan = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        menuPenerimaan = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -481,6 +498,34 @@ public class FormMain extends javax.swing.JFrame {
 
         jMenuBar1.add(menuRiwayat);
 
+        menuLaporan.setText("LAPORAN");
+
+        jMenuItem1.setText("LAPORAN REQUEST ASSET");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuLaporan.add(jMenuItem1);
+
+        jMenuItem2.setText("LAPORAN REQUEST PURCHASING");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        menuLaporan.add(jMenuItem2);
+
+        jMenuBar1.add(menuLaporan);
+
+        menuPenerimaan.setText("PENERIMAAN ITEM");
+        menuPenerimaan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuPenerimaanMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menuPenerimaan);
+
         jMenu5.setText("LOG OUT");
         jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -610,6 +655,21 @@ public class FormMain extends javax.swing.JFrame {
         Refresh();
     }//GEN-LAST:event_formWindowActivated
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        new FormLaporanRequestAsset().show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        new FormLaporanRequestPurchasing().show();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void menuPenerimaanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPenerimaanMouseClicked
+        // TODO add your handling code here:
+        new FormPenerimaan().show();
+    }//GEN-LAST:event_menuPenerimaanMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -656,6 +716,8 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -673,7 +735,9 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JMenu menuInput;
     private javax.swing.JMenuItem menuKaryawan;
     private javax.swing.JMenuItem menuKategori;
+    private javax.swing.JMenu menuLaporan;
     private javax.swing.JMenu menuMonitoring;
+    private javax.swing.JMenu menuPenerimaan;
     private javax.swing.JMenuItem menuReqAsset;
     private javax.swing.JMenuItem menuReqPurchasing;
     private javax.swing.JMenu menuRiwayat;

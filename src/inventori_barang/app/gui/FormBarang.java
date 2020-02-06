@@ -54,6 +54,7 @@ public class FormBarang extends javax.swing.JFrame {
         txtstok.setText("");
         btnsave.setEnabled(true);
         btnUbah.setEnabled(false);
+        txtkode.setText("");
     }
     
     private void ShowKategori(){
@@ -103,6 +104,11 @@ public class FormBarang extends javax.swing.JFrame {
         btnHapus1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(23, 35, 51));
 
@@ -507,6 +513,11 @@ public class FormBarang extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnHapus1ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        Refresh();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

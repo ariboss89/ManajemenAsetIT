@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.5.8)
-# Date: 2020-01-27 23:05:33
+# Date: 2020-02-07 01:56:37
 # Generator: MySQL-Front 5.3  (Build 4.81)
 
 /*!40101 SET NAMES utf8 */;
@@ -17,7 +17,7 @@ CREATE TABLE `pengumuman` (
 # Data for table "pengumuman"
 #
 
-INSERT INTO `pengumuman` VALUES ('Apa lagi hah ?');
+INSERT INTO `pengumuman` VALUES ('AllllIIIUUUUUUU');
 
 #
 # Structure for table "reqasset"
@@ -30,6 +30,7 @@ CREATE TABLE `reqasset` (
   `jumlah` int(11) NOT NULL,
   `idsupplier` varchar(11) DEFAULT NULL,
   `idpetugas` varchar(11) DEFAULT NULL,
+  `departemen` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idreqasset`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -37,7 +38,7 @@ CREATE TABLE `reqasset` (
 # Data for table "reqasset"
 #
 
-INSERT INTO `reqasset` VALUES ('ASET0001','2019-01-15',3,'S002','7');
+INSERT INTO `reqasset` VALUES ('ASET0001','2020-01-28',10,'S008','7','NPD'),('ASET0002','2020-02-05',6,'S008','7','NPD'),('ASET0003','2020-02-05',8,'S008','7','NPD'),('ASET0004','2020-02-05',4,'S002','7','NPD'),('ASET0005','2020-02-05',2,'S008','7','NPD'),('ASET0006','2020-02-05',4,'S008','7','NPD');
 
 #
 # Structure for table "reqassetdetail"
@@ -58,7 +59,7 @@ CREATE TABLE `reqassetdetail` (
 # Data for table "reqassetdetail"
 #
 
-INSERT INTO `reqassetdetail` VALUES ('ASDT0001','ASET0001','A-005',5,'','Approved'),('ASDT0002','ASET0001','A-015',2,NULL,'On Waiting');
+INSERT INTO `reqassetdetail` VALUES ('ASDT0001','ASET0001','A-005',10,'','Unapproved'),('ASDT0002','ASET0002','S-022',3,'','Approved'),('ASDT0003','ASET0003','A-005',4,NULL,'On Waiting'),('ASDT0004','ASET0004','A-005',2,NULL,'On Waiting'),('ASDT0005','ASET0005','A-005',1,NULL,'On Waiting'),('ASDT0006','ASET0006','A-005',2,NULL,'On Waiting');
 
 #
 # Structure for table "reqpurchasing"
@@ -78,7 +79,7 @@ CREATE TABLE `reqpurchasing` (
 # Data for table "reqpurchasing"
 #
 
-INSERT INTO `reqpurchasing` VALUES ('PRCH0001','2020-01-27',4,'S002','7');
+INSERT INTO `reqpurchasing` VALUES ('PRCH0001','2020-01-27',4,'S002','2');
 
 #
 # Structure for table "reqpurchasingdetail"
@@ -99,7 +100,7 @@ CREATE TABLE `reqpurchasingdetail` (
 # Data for table "reqpurchasingdetail"
 #
 
-INSERT INTO `reqpurchasingdetail` VALUES ('PRDT0001','PRCH0001','A-011',2,NULL,'On Waiting');
+INSERT INTO `reqpurchasingdetail` VALUES ('PRDT0001','PRCH0001','A-011',2,'','Approved');
 
 #
 # Structure for table "tmbarang"
@@ -120,7 +121,7 @@ CREATE TABLE `tmbarang` (
 # Data for table "tmbarang"
 #
 
-INSERT INTO `tmbarang` VALUES (5,'A-005','Xiaomi TV','TV','Buah',77),(7,'S-022','LG',NULL,'Buah',10),(9,'S-021','Samsung 21 Inch',NULL,'Buah',80),(10,'A-011','Toshiba 20 Inch',NULL,'Buah',12),(11,'90AB','LCD TV Samsung',NULL,'Buah',90),(12,'F-010','Samsung 24 Inch',NULL,'Buah',80),(13,'A-001','Simbada',NULL,'Buah',70),(14,'M-001','MacBook Pro 15 Inch',NULL,'Buah',14),(15,'M-002','MacBook Pro 17 Inch',NULL,'Buah',19),(16,'C-001','Acer Aspire One 15 Inch',NULL,'Buah',15),(17,'C-002','Acer Aspire One 18 Inch',NULL,'Buah',6),(18,'A-002','Simbada Type C3',NULL,'Buah',68);
+INSERT INTO `tmbarang` VALUES (5,'A-005','Xiaomi TV','TV','Buah',3),(7,'S-022','LG',NULL,'Buah',7),(9,'S-021','Samsung 21 Inch',NULL,'Buah',80),(10,'A-011','Toshiba 20 Inch',NULL,'Buah',0),(11,'90AB','LCD TV Samsung',NULL,'Buah',90),(12,'F-010','Samsung 24 Inch',NULL,'Buah',80),(13,'A-001','Simbada',NULL,'Buah',70),(14,'M-001','MacBook Pro 15 Inch',NULL,'Buah',14),(15,'M-002','MacBook Pro 17 Inch',NULL,'Buah',19),(16,'C-001','Acer Aspire One 15 Inch',NULL,'Buah',15),(17,'C-002','Acer Aspire One 18 Inch',NULL,'Buah',6),(18,'A-002','Simbada Type C3',NULL,'Buah',68);
 
 #
 # Structure for table "tmkategori"
@@ -151,15 +152,16 @@ CREATE TABLE `tmpetugas` (
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `level` varchar(50) DEFAULT NULL,
+  `departemen` varchar(50) DEFAULT NULL,
   `status` enum('aktif','nonaktif') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 #
 # Data for table "tmpetugas"
 #
 
-INSERT INTO `tmpetugas` VALUES (2,'Muhamad Yusuf','admin','admin','IT Staff','aktif'),(3,'Zae','operator','admin','Manager','aktif'),(6,'Ari','ariboss89','123456','Supervisor','aktif'),(7,'Manise','manise123','123456','Employee Staff','aktif');
+INSERT INTO `tmpetugas` VALUES (2,'Muhamad Yusuf','admin','admin','IT Staff','PLANNER','aktif'),(3,'Zae','operator','admin','Manager','NPD','aktif'),(6,'Ari','ariboss89','123456','Supervisor','NPD','aktif'),(7,'Manise','manise123','123456','Employee Staff','PHARMA','aktif'),(8,'Ramadhan','rama123','123456','IT Staff','PLANNER','aktif');
 
 #
 # Structure for table "tmsupplier"

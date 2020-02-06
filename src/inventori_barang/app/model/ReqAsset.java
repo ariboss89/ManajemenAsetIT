@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author User
  */
-public class ReqAsset {
+public class ReqAsset extends Penerimaan{
     
     private Koneksi con;
     private Statement st;
@@ -30,6 +30,15 @@ public class ReqAsset {
     private String status;
     private String sum;
     private int stok;
+    private String departemen;
+
+    public String getDepartemen() {
+        return departemen;
+    }
+
+    public void setDepartemen(String departemen) {
+        this.departemen = departemen;
+    }
 
     public int getStok() {
         return stok;
@@ -93,12 +102,12 @@ public class ReqAsset {
         }
     }
     
-    public void Save(String idreqasset, Date tanggal, int jumlah, String idsupplier, String idpetugas) {
+    public void Save(String idreqasset, Date tanggal, int jumlah, String idsupplier, String idpetugas, String departemen) {
         con = new Koneksi();
         con.connect();
         try {
             st = con.conn.createStatement();
-            query = "insert into reqasset(idreqasset, tanggal, jumlah, idsupplier, idpetugas)values('" + idreqasset + "','" + tanggal + "','" + jumlah + "','" + idsupplier + "','"+idpetugas+"')";
+            query = "insert into reqasset(idreqasset, tanggal, jumlah, idsupplier, idpetugas, departemen)values('" + idreqasset + "','" + tanggal + "','" + jumlah + "','" + idsupplier + "','"+idpetugas+"', '"+departemen+"')";
             st.executeUpdate(query);
             st.close();
             con.conn.close();

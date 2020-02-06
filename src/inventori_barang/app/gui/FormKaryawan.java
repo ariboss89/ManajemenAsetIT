@@ -29,9 +29,9 @@ public class FormKaryawan extends javax.swing.JFrame {
     Table tbl = new Table();
     private int a;
     private String rs[][];
-    String[] namaKolom = {"Nama", "Username", "Level", "Status"};
+    String[] namaKolom = {"Nama", "Username", "Level","Departemen", "Status"};
     int jmlKolom = namaKolom.length;
-    int[] lebar = {400, 400, 400, 400};
+    int[] lebar = {400, 400, 400, 400, 400};
     /**
      * Creates new form FormKaryawan1
      */
@@ -99,8 +99,10 @@ public class FormKaryawan extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtcpassword = new javax.swing.JPasswordField();
         txtpassword = new javax.swing.JPasswordField();
-        txtstatus1 = new javax.swing.JComboBox<String>();
+        cbLevel = new javax.swing.JComboBox<String>();
         jLabel9 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        cbDepartemen = new javax.swing.JComboBox<String>();
         btnHapus3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -225,9 +227,13 @@ public class FormKaryawan extends javax.swing.JFrame {
             }
         });
 
-        txtstatus1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Employee Staff", "IT Staff", "Manager", "Supervisor" }));
+        cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Employee Staff", "IT Staff", "Manager", "Supervisor" }));
 
         jLabel9.setText("Level");
+
+        jLabel7.setText("Departemen");
+
+        cbDepartemen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NPD", "PHARMA", "PLANNER" }));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -237,31 +243,32 @@ public class FormKaryawan extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(10, 10, 10))
+                    .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(10, 10, 10))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(3, 3, 3)))
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLayout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbDepartemen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtstatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbLevel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtusername, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtpassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtcpassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtnama)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                         .addComponent(btncancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnsave, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtstatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtstatus1, 0, 156, Short.MAX_VALUE)
-                        .addComponent(txtusername, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtpassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtcpassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtnama)))
+                        .addComponent(btnsave, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
@@ -285,9 +292,13 @@ public class FormKaryawan extends javax.swing.JFrame {
                     .addComponent(txtcpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtstatus1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbDepartemen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -295,7 +306,7 @@ public class FormKaryawan extends javax.swing.JFrame {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsave)
                     .addComponent(btncancel))
-                .addGap(475, 475, 475))
+                .addGap(438, 438, 438))
         );
 
         btnHapus3.setText("CETAK");
@@ -373,7 +384,8 @@ public class FormKaryawan extends javax.swing.JFrame {
         int id = kry.getId();
         String nama = txtnama.getText().trim();
         String username = txtusername.getText().trim();
-        String level = txtstatus1.getSelectedItem().toString().trim();
+        String level = cbLevel.getSelectedItem().toString().trim();
+        String departemen = cbDepartemen.getSelectedItem().toString().trim();
         String status = txtstatus.getSelectedItem().toString().trim();
         
         if(nama.equals("")){
@@ -385,7 +397,7 @@ public class FormKaryawan extends javax.swing.JFrame {
             txtusername.requestFocus();
         }
         else{
-            kry.Update(nama, username, level, status, id);
+            kry.Update(nama, username, level, departemen, status, id);
             Refresh();
         }
     }//GEN-LAST:event_btnUbahActionPerformed
@@ -409,7 +421,8 @@ public class FormKaryawan extends javax.swing.JFrame {
         String username = txtusername.getText().trim();
         String password = txtpassword.getText().trim();
         String confirm = txtcpassword.getText().trim();
-        String level = txtstatus1.getSelectedItem().toString().trim();
+        String level = cbLevel.getSelectedItem().toString().trim();
+        String departemen = cbDepartemen.getSelectedItem().toString().trim();
         String status = txtstatus.getSelectedItem().toString().trim();
         
         if(nama.equals("")){
@@ -437,7 +450,7 @@ public class FormKaryawan extends javax.swing.JFrame {
             txtcpassword.requestFocus();
         }
         else{
-            kry.Save(nama, username, confirm, level, status);
+            kry.Save(nama, username, confirm, level, departemen, status);
             Refresh();
         }
     }//GEN-LAST:event_btnsaveActionPerformed
@@ -536,11 +549,14 @@ public class FormKaryawan extends javax.swing.JFrame {
     private javax.swing.JButton btnUbah;
     private javax.swing.JButton btncancel;
     private javax.swing.JButton btnsave;
+    private javax.swing.JComboBox<String> cbDepartemen;
+    private javax.swing.JComboBox<String> cbLevel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -554,7 +570,6 @@ public class FormKaryawan extends javax.swing.JFrame {
     private javax.swing.JTextField txtnama;
     private javax.swing.JPasswordField txtpassword;
     private javax.swing.JComboBox<String> txtstatus;
-    private javax.swing.JComboBox<String> txtstatus1;
     private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
 }
