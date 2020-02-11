@@ -114,7 +114,7 @@ public class FormBarang extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 0, 22)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(182, 229, 251));
-        jLabel8.setText("Data Barang");
+        jLabel8.setText("Data Asset");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

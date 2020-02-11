@@ -3,20 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormMain.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormApprovalRequestPurchasing.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormSupplier.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormApprovalRequestAsset.java</file>
             <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormLogin.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/model/RiwayatAsset.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormRequestPurchasing.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/model/Login.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormRiwayatAsset.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormRequestAsset.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormRiwayatPurchasing.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormBarang.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormLaporan.java</file>
-            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/model/ReqAsset.java</file>
+            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormLaporanRequestPurchasing.java</file>
+            <file>file:/D:/PROJECT/Repos/ManajemenAsetIT/src/inventori_barang/app/gui/FormPenerimaan.java</file>
         </group>
     </open-files>
 </project-private>

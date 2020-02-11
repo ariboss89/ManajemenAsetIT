@@ -206,7 +206,12 @@ public class FormPenerimaan extends javax.swing.JFrame {
 
         txtStatus.setEditable(false);
         txtStatus.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtStatus.setText("On Receiving");
+        txtStatus.setText("On Received");
+        txtStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStatusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -351,6 +356,10 @@ public class FormPenerimaan extends javax.swing.JFrame {
         // TODO add your handling code here:
         Refresh();
     }//GEN-LAST:event_formWindowActivated
+
+    private void txtStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStatusActionPerformed
 
     /**
      * @param args the command line arguments
