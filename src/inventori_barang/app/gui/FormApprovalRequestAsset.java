@@ -607,15 +607,17 @@ public class FormApprovalRequestAsset extends javax.swing.JFrame {
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
-//        int row = jTable2.getSelectedRow();
-//        txtIdDetail.setText(jTable2.getValueAt(row, 0).toString());
-//        txtId.setText(jTable2.getValueAt(row, 1).toString());
-//        req.setIdBarang(jTable2.getValueAt(row, 2).toString());
-//        ShowNamaBarang();
-//        txtJumlah.setText(jTable2.getValueAt(row, 3).toString());
-//        txtStatus.setText(jTable2.getValueAt(row, 4).toString());
-//        ShowCatatan();
-//        jButton1.setEnabled(true);
+        int row = jTable2.getSelectedRow();
+        txtIdDetail.setText(jTable2.getValueAt(row, 0).toString());
+        txtId.setText(jTable2.getValueAt(row, 1).toString());
+        ShowRequest();
+        ShowNamaRequest();
+        req.setIdBarang(jTable2.getValueAt(row, 2).toString());
+        ShowNamaBarang();
+        txtJumlah.setText(jTable2.getValueAt(row, 3).toString());
+        txtStatus.setText(jTable2.getValueAt(row, 4).toString());
+        ShowCatatan();
+        jButton1.setEnabled(true);
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked

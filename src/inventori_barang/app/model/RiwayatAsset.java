@@ -81,4 +81,45 @@ public class RiwayatAsset {
         }
         return data;
     }
+    
+    public String[][] ShowDetailData(String id) {
+
+        res = null;
+        String[][] data = null;
+        con = new Koneksi();
+        con.connect();
+        int jumlahBaris = 0;
+        try {
+            st = con.conn.createStatement();
+            query = "Select count(iddetailreqasset) AS Jumlah FROM reqassetdetail";
+            res = st.executeQuery(query);
+            if (res.next()) {
+                jumlahBaris = res.getInt("Jumlah");
+            }
+            query = "select *from reqassetdetail where idreqasset = '"+id+"'";
+            res = st.executeQuery(query);
+            data = new String[jumlahBaris][4];
+            int r = 0;
+            while (res.next()) {
+                data[r][0] = res.getString("iddetailreqasset");
+                data[r][1] = res.getString("idbarang");
+                data[r][2] = res.getString("catatan");
+                data[r][3] = res.getString("status");
+                r++;
+            }
+            int jmlBaris = r;
+            String[][] tmpArray = data;
+            data = new String[jmlBaris][4];
+            for (r = 0; r < jmlBaris; r++) {
+                for (int c = 0; c < 4; c++) {
+                    data[r][c] = tmpArray[r][c];
+                }
+            }
+            st.close();
+            con.conn.close();
+        } catch (SQLException e) {
+            System.err.println("SQLException : " + e.getMessage());
+        }
+        return data;
+    }
 }
